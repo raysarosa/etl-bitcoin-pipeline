@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "etl-bitcoin"
+version = "0.1.0"
+description = ""
+authors = ["raysarosa <raysarosa@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.12.5"
+requests = "^2.32.4"
+tinydb = "^4.8.2"
+psycopg2 = "^2.9.10"
+python-dotenv = "^1.1.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
