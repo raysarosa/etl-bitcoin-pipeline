@@ -174,3 +174,14 @@ poetry.toml
 pyrightconfig.json
 
 # End of https://www.toptal.com/developers/gitignore/api/python
+
+# --- Custom ignores for this project ---
+
+# Local TinyDB file
+bitcoin_json
+
+# Ignore old examples folder
+exemplos/
+
+# Ignore old pipeline script
+src/pipeline00.py
