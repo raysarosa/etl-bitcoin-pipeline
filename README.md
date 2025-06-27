@@ -1,16 +1,18 @@
 # 📊 ETL Bitcoin Pipeline
 
-This project implements a simple ETL (Extract, Transform, Load) pipeline that collects real-time Bitcoin price data from the Coinbase API and loads it into a PostgreSQL database.
+This project implements a simple ETL (Extract, Transform, Load) pipeline that collects real-time Bitcoin price data from the Coinbase API, stores it in a PostgreSQL database, and displays it live on a Streamlit dashboard with auto-refresh.
 
 ---
 
 ## ⚙️ Technologies Used
 
 - **Python 3**
-- **Poetry** (for dependency management)
+- **Poetry** (dependency management)
 - **Requests** (to access the Coinbase API)
-- **psycopg2** (to connect with PostgreSQL)
-- **python-dotenv** (to manage environment variables)
+- **psycopg2** (PostgreSQL connection)
+- **python-dotenv** (environment variables)
+- **Streamlit** (live dashboard)
+- **streamlit-autorefresh** (automatic refresh)
 - **TinyDB** (optional: for testing or lightweight storage)
 - **PostgreSQL**
 
@@ -20,11 +22,12 @@ This project implements a simple ETL (Extract, Transform, Load) pipeline that co
 ```bash
 etl-bitcoin-pipeline/
 ├── src/
-│ └── pipeline01.py # Main ETL pipeline script
-├── .env # Environment variables (not uploaded)
-├── .gitignore # Files to exclude from Git
-├── pyproject.toml # Poetry configuration and dependencies
-└── README.md # This file
+│   ├── pipeline01.py   # Main ETL pipeline script
+│   └── dashboard.py    # Streamlit dashboard script
+├── .env                # Environment variables (not uploaded)
+├── .gitignore          # Files to exclude from Git
+├── pyproject.toml      # Poetry configuration and dependencies
+└── README.md           # This file
 ```
 
 ---
@@ -34,6 +37,7 @@ etl-bitcoin-pipeline/
 1. **Extract**: Real-time BTC price is pulled from Coinbase API.
 2. **Transform**: The raw JSON is cleaned and formatted (value, currency, timestamp).
 3. **Load**: The data is saved into a PostgreSQL database (table created if not exists).
+4. **Visualize**: A Streamlit dashboard displays the latest Bitcoin price, timestamp and price variation (delta), with auto-refresh.
 
 ---
 
@@ -59,18 +63,26 @@ DB_HOST=localhost
 DB_PORT=5432
 ```
 
-4. **Run the pipeline**
+4. **Run the ETL pipeline (Terminal 1)**
 ```bash
 poetry run python src/pipeline01.py
 ```
-The script runs in an infinite loop every 12 seconds. Press Ctrl + C to stop.
+
+
+5. **Run the Streamlit dashboard (Terminal 2)**
+```bash
+poetry run streamlit run src/dashboard.py
+```
+The ETL will continuously collect and insert new data into the database every few seconds. The Streamlit dashboard will auto-refresh and display the latest price, timestamp and delta.
+
+Press Ctrl + C in each terminal to stop.
 
 ---
 
 ## 🛡️ .env and Security
 
 This project uses a `.env` file to store sensitive database credentials (like password and user).  
-This file is excluded from version control via `.gitignore`, keeping your information safe.
+This file is excluded from version control via `.gitignore`, keeping your credentials safe.
 
 ---
 
